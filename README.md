@@ -18,5 +18,10 @@ crank --config .\benchmark.benchmarks.yml --scenario hello --profile local
 ## run against net6.0 framework
 crank --config .\benchmark.benchmarks.yml --scenario hello --profile local --application.framework net6.0
 
+## docker image creation (from the root of the solution)
+docker build -f src/Benchmark.Sample.Api/Dockerfile -t benchmarksampleapi .
+
+## run docker image
+docker run -d -p 5000:80 --name crank benchmarksampleapi
 
 
