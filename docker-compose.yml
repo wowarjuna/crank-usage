@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  benchmark.sample.api:
+    image: ${DOCKER_REGISTRY-}benchmarksampleapi
+    build:
+      context: .
+      dockerfile: src/Benchmark.Sample.Api/Dockerfile
+

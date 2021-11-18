@@ -1,0 +1,32 @@
+imports:
+  - https://raw.githubusercontent.com/dotnet/crank/main/src/Microsoft.Crank.Jobs.Bombardier/bombardier.yml
+
+jobs:
+  server:
+    source:
+      repository: https://github.com/wowarjuna/crank-usage
+      branchOrCommit: main
+      project: src/Benchmark.Sample.Api/Benchmark.Sample.Api.csproj
+    readyStateText: Application started.
+
+scenarios:
+  hello:
+    application:
+      job: server
+    load:
+      job: bombardier
+      variables:
+        serverPort: 5000
+        path: /WeatherForecast
+
+profiles:
+  local:
+    variables:
+      serverAddress: localhost
+    jobs: 
+      application:
+        endpoints: 
+          - http://localhost:5010
+      load:
+        endpoints: 
+          - http://localhost:5010
